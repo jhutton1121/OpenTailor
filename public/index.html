@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Tailoring App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    label { font-weight: bold; }
+    textarea { width: 100%; }
+    div { margin-bottom: 1em; }
+  </style>
+</head>
+<body>
+  <h1>Resume Tailoring</h1>
+  <form action="/submit" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="current_resume">Current Resume:</label><br>
+      <textarea id="current_resume" name="current_resume" rows="10" placeholder="Paste your resume here"></textarea>
+    </div>
+    <div>
+      <label for="career_context">Career Context (Upload .txt file):</label><br>
+      <input type="file" id="career_context" name="career_context" accept=".txt">
+    </div>
+    <div>
+      <label for="job_description">Job Description:</label><br>
+      <textarea id="job_description" name="job_description" rows="10" placeholder="Paste the job description here"></textarea>
+    </div>
+    <div>
+      <label for="additional_instruction">Additional Instruction (optional):</label><br>
+      <textarea id="additional_instruction" name="additional_instruction" rows="5" placeholder="Additional instructions"></textarea>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</body>
+</html>
