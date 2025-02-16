@@ -102,11 +102,9 @@ app.post("/submit", upload.single("career_context"), (req, res) => {
       });
 
       const latexCode = apiResponse.choices[0].message.content;
-      const latexFilePath = path.join(outputDir, "latex_code.txt");
-      fs.writeFileSync(latexFilePath, latexCode, "utf8");
-
-      // Instead of generating a PDF, simply return the LaTeX code text file
-      res.sendFile(latexFilePath);
+      
+      res.set("Content-Type", "text/plain");
+      res.send(latexCode);
     } catch (apiError) {
       console.error(
         "Error calling ChatGPT API:",
@@ -120,3 +118,7 @@ app.post("/submit", upload.single("career_context"), (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+// to do: Write regex to capture the LaTeX in apiResponse.choices[0].message
+// store that into a variable, pass it to latex -> PDF function
+// Serve the PDF as a downloadable item in the browser after submit
