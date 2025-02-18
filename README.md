@@ -14,7 +14,7 @@ via RegEx and saved in a separate file.
 
 # How to use it
 * Clone the git repository locally on your computer.
-* Update your .env file to have OPENAI_API_KEY=yourkeyhere
+* Create .env file and update to have OPENAI_API_KEY=yourkeyhere
 * Ensure you have Docker downloaded on your computer. If you do not, navigate to https://www.docker.com/products/docker-desktop/ and download Docker Desktop.
 * Once Docker is installed, navigate to the project in your terminal and enter  `docker compose up`
 * Once the application has built and the server has run, navigate to localhost:3000
