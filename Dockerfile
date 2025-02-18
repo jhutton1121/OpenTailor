@@ -1,8 +1,6 @@
 # Node Image
 FROM node:16
 
-RUN apt-get update && apt-get install -y texlive-latex-base
-
 # Set app directory inside the container
 WORKDIR /app
 

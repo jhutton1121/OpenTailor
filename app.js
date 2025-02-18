@@ -11,6 +11,15 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // Initialize OpenAI (the API key should be passed via environment variable)
 const openai = new OpenAI();
 
@@ -103,8 +112,41 @@ app.post("/submit", upload.single("career_context"), (req, res) => {
 
       const latexCode = apiResponse.choices[0].message.content;
       
-      res.set("Content-Type", "text/plain");
-      res.send(latexCode);
+      const customHeader = fs.readFileSync('latex_format_overwrite.txt', 'utf8');
+
+      const docIndex = latexCode.indexOf('\\begin{document}');
+
+      if (docIndex === -1) {
+        // Handle the case where \begin{document} isn't found
+        return res.status(400).send("Error: LaTeX code does not contain '\\begin{document}'.");
+      }
+
+      let newLatexCode = customHeader + latexCode.slice(docIndex);
+
+      if (newLatexCode.endsWith("```")) {
+      newLatexCode = newLatexCode.slice(0, -3).trim();
+    }
+
+
+    const texFilePath = path.join(outputDir, "compiled.tex");
+    fs.writeFileSync(texFilePath, newLatexCode, "utf8");
+      
+    const html = `
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Redirecting to Overleaf...</title>
+        </head>
+        <body onload="document.forms[0].submit()">
+          <form action="https://www.overleaf.com/docs" method="POST">
+            <textarea name="snip" style="display:none;">${escapeHtml(newLatexCode)}</textarea>
+          </form>
+          <p>Redirecting to Overleaf...</p>
+        </body>
+      </html>
+      `;
+
+      res.send(html);
     } catch (apiError) {
       console.error(
         "Error calling ChatGPT API:",

@@ -17,19 +17,24 @@ on applicant tracking systems.
 You output a tailored LaTeX resume which has been updated with career context, current resume context,
 and context from the job description. This resume should easily pass applicant tracking systems given the job description.
 
+It is CRITICALLY important for the LaTeX document that you do not change anything before \begin{document}.
+This cannot be understated. Everything you output before \begin{document} needs to be the exact same as latex_template.
+
 Here are your instructions:
 Step 1: Create a professional summary given my career context and current resume. Remember, don't add the professional summary to the resume.
 Step 2: Generate a list of requirements from the Job Description. Map the job description
-required skills and tools to my professional strengths. Share the resume writing strategy
-with me, explaining why the resume should have a high selection rate with applicant tracking systems.
+required skills and tools to my professional strengths.
 Step 3: Create a tailored to the job description resume with the latex_template,
-removing any pre-filled information from the template.
-Do not edit anything before \begin{document}. 
+removing any pre-filled information from the template after \begin{document}.
+Do not edit anything before \begin{document}. This is very important- Ensure everything before \begin{document} is the exact same as the provided latex template.
 If there is an additional instruction informing you to not touch a part of the current_resume, then keep the experience the same
-for that part when filling in the latex_template. Do not change anything about how the header is formatted, just change the text displayed.
+for that part when filling in the latex_template. 
+Do not change anything about how the header is formatted, just change the text displayed.
+Again- DO NOT CHANGE ANHYTHING ABOUT HOW THE HEADER IS FORMATTED. Just change the text in between curly brackets.
 Replace the Email with the email provided in career_context, as well as the phone number, linkedin, and github. Delete
 the github from the header entirely if one is not provided. 
-Ensure any dollar signs are backslashed, for example '\$20mm' instead of '$20mm' in the latex. 
+Ensure any dollar signs are backslashed, for example '\$20mm' instead of '$20mm' in the latex. This is very important for formatting.
+Finally, avoid writing '}{}{' on an empty line in LaTeX, that breaks the document.
 Step 4: Return ONLY the filled in and tailored latex template as plain text. DO NOT ADD THE PROFESSIONAL SUMMARY TO THIS LATEX. 
 
 
