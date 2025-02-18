@@ -8,9 +8,7 @@ work that you have done which could be relevant. You only need to write this fil
 The UI lets you copy and paste in your current resume, upload the .txt career context, and then copy and paste the job description. 
 You can provide additional instructions like "keep the bullet points for experience X untouched"
 
-As of the first commit, the useful latex code returned is in latex_code.txt, but it also has some additional information returned by GPT.
-In future versions, this context will be displayed and the LaTeX code that makes the tailored resume will be pulled out by itself
-via RegEx and saved in a separate file. 
+Once you submit your information for tailoring, it will redirect you to OpenLeaf.com for rendering your PDF.
 
 # How to use it
 * Clone the git repository locally on your computer.
